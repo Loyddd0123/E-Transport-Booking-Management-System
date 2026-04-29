@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Transport Login</title>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="login-page">
+
+  <div class="login-overlay"></div>
+
+  <div class="login-box">
+    <div class="brand">
+      <div class="brand-icon">🚌</div>
+      <h2>E-Transport</h2>
+    </div>
+
+    <h1>Welcome Back</h1>
+    <p class="subtitle">Book and manage your trips easily</p>
+
+    <button class="social-btn">🌐 Continue with Google</button>
+    <button class="social-btn"> Continue with Apple</button>
+
+    <div class="divider">
+      <span></span>
+      <p>or</p>
+      <span></span>
+    </div>
+
+    <div class="input-box">
+      <span>✉</span>
+      <input type="email" id="email" value="passenger@etransport.local" placeholder="Email address">
+    </div>
+
+    <div class="input-box">
+      <span>🔒</span>
+      <input type="password" id="password" value="password" placeholder="Password">
+    </div>
+
+    <button onclick="login()" class="login-btn">Login</button>
+
+    <p class="bottom-text">
+      Sample password: <b>password</b>
+    </p>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

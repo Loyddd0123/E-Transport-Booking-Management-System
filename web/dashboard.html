@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Transport Dashboard</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <div class="dashboard">
+    <aside class="sidebar">
+      <h3>🚌 E-Transport</h3>
+
+      <a href="#" class="active">Dashboard</a>
+      <a href="#schedules">Available Schedules</a>
+      <a href="#bookings">My Bookings</a>
+      <a href="#">Payment Records</a>
+      <a href="#">Profile</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar">
+        <div>
+          <h2>Welcome, Passenger</h2>
+          <p>Manage your trips, bookings, and payments.</p>
+        </div>
+        <button onclick="loadDashboard()" class="btn btn-outline-primary">Refresh</button>
+      </div>
+
+      <div class="row g-4 mb-4">
+        <div class="col-md-3">
+          <div class="stat-card">
+            <h6>Available Trips</h6>
+            <h3 id="tripCount">0</h3>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <h6>My Bookings</h6>
+            <h3 id="bookingCount">0</h3>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <h6>Pending Payments</h6>
+            <h3>0</h3>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card">
+            <h6>Completed Trips</h6>
+            <h3>0</h3>
+          </div>
+        </div>
+      </div>
+
+      <section id="schedules" class="card-box">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4>Available Schedules</h4>
+          <input type="text" id="searchRoute" onkeyup="filterSchedules()" class="form-control w-25" placeholder="Search route">
+        </div>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Departure</th>
+                <th>Vehicle</th>
+                <th>Seats</th>
+                <th>Fare</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="schedules"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="bookings" class="card-box mt-4">
+        <h4 class="mb-3">My Recent Bookings</h4>
+
+        <div class="table-responsive">
+          <table class="table align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Passenger</th>
+                <th>Route</th>
+                <th>Seats</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="bookings"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    loadDashboard();
+  </script>
+</body>
+</html>
