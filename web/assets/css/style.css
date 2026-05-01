@@ -10,13 +10,28 @@ body {
 .login-page {
   min-height: 100vh;
   background:
-    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.65)),
-    url("https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=80");
+    linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.7)),
+    url("image/highway-transport.jpg");
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  /* smooth effect */
+  animation: zoomBg 20s ease-in-out infinite alternate;
+}
+
+/* subtle zoom animation (premium feel) */
+@keyframes zoomBg {
+  from {
+    background-size: 100%;
+  }
+  to {
+    background-size: 110%;
+  }
 }
 
 .login-box {
@@ -97,6 +112,7 @@ body {
   align-items: center;
   gap: 12px;
   padding: 14px 18px;
+  margin-top: 10px;
   margin-bottom: 14px;
   border-radius: 30px;
   border: 1px solid rgba(255,255,255,.18);
@@ -150,3 +166,400 @@ body {
     font-size: 30px;
   }
 }
+.dashboard-body {
+  background: #eef3f8;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #0f172a;
+  color: white;
+  padding: 25px;
+  position: fixed;
+  height: 100vh;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 35px;
+}
+
+.sidebar a {
+  display: block;
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: #2563eb;
+  color: white;
+}
+
+.content {
+  margin-left: 260px;
+  padding: 30px;
+  width: calc(100% - 260px);
+}
+
+.hero-dashboard {
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+  color: white;
+  padding: 35px;
+  border-radius: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-dashboard h1 {
+  font-weight: 800;
+}
+
+.hero-dashboard img {
+  width: 170px;
+}
+
+.info-card {
+  background: white;
+  padding: 25px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.info-card span {
+  font-size: 32px;
+}
+
+.info-card p {
+  margin: 12px 0 5px;
+  color: #64748b;
+}
+
+.info-card h2 {
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.panel-header p {
+  color: #64748b;
+  margin: 0;
+}
+
+.search-box {
+  max-width: 280px;
+  border-radius: 14px;
+}
+
+.badge-status {
+  padding: 8px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+}
+
+.status-pending {
+  background: #f59e0b;
+}
+
+.status-confirmed {
+  background: #16a34a;
+}
+
+.status-cancelled {
+  background: #dc2626;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .hero-dashboard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-dashboard img {
+    margin-top: 20px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+}
+
+.page-section {
+  animation: fadeIn .2s ease;
+}
+
+.d-none {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.dashboard-body {
+  background: #eef3f8;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #0f172a;
+  color: white;
+  padding: 25px;
+  position: fixed;
+  height: 100vh;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 35px;
+}
+
+.sidebar .nav-link {
+  display: block;
+  color: #cbd5e1;
+  text-decoration: none;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  border-radius: 14px;
+  cursor: pointer;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+  background: #2563eb;
+  color: white;
+}
+
+.content {
+  margin-left: 260px;
+  padding: 30px;
+  width: calc(100% - 260px);
+}
+
+.hero-dashboard {
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+  color: white;
+  padding: 35px;
+  border-radius: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-dashboard h1 {
+  font-weight: 800;
+}
+
+.hero-dashboard img {
+  width: 170px;
+}
+
+.info-card {
+  background: white;
+  padding: 25px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.info-card span {
+  font-size: 32px;
+}
+
+.info-card p {
+  margin: 12px 0 5px;
+  color: #64748b;
+}
+
+.info-card h2 {
+  font-weight: 800;
+  color: #2563eb;
+}
+
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.panel-header p,
+.profile-panel p {
+  color: #64748b;
+  margin: 0;
+}
+
+.search-box {
+  max-width: 280px;
+  border-radius: 14px;
+}
+
+.badge-status {
+  padding: 8px 14px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+}
+
+.status-pending {
+  background: #f59e0b;
+}
+
+.status-confirmed {
+  background: #16a34a;
+}
+
+.status-cancelled {
+  background: #dc2626;
+}
+
+.payment-box {
+  background: #f8fafc;
+  border-radius: 18px;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+}
+
+.page-section {
+  animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .hero-dashboard {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-dashboard img {
+    margin-top: 20px;
+  }
+
+  .panel-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .search-box {
+    max-width: 100%;
+  }
+}
+
+.signup-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 13px;
+  border-radius: 30px;
+  border: 1px solid rgba(255,255,255,.25);
+  background: transparent;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-btn:hover {
+  background: rgba(255,255,255,.12);
+}
+
+.register-box {
+  width: 430px;
+  padding: 42px;
+  border-radius: 28px;
+  background: rgba(25, 25, 25, 0.72);
+  backdrop-filter: blur(18px);
+  color: white;
+  box-shadow: 0 25px 60px rgba(0,0,0,.45);
+}
+
+.register-box h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+

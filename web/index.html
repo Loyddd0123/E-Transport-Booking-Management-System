@@ -20,15 +20,6 @@
     <h1>Welcome Back</h1>
     <p class="subtitle">Book and manage your trips easily</p>
 
-    <button class="social-btn">🌐 Continue with Google</button>
-    <button class="social-btn"> Continue with Apple</button>
-
-    <div class="divider">
-      <span></span>
-      <p>or</p>
-      <span></span>
-    </div>
-
     <div class="input-box">
       <span>✉</span>
       <input type="email" id="email" value="passenger@etransport.local" placeholder="Email address">
@@ -40,11 +31,34 @@
     </div>
 
     <button onclick="login()" class="login-btn">Login</button>
+    <button onclick="showRegister()" class="signup-btn">Create an account</button>
 
     <p class="bottom-text">
       Sample password: <b>password</b>
     </p>
   </div>
+
+  <div id="registerBox" class="register-box" style="display:none;">
+  <h2>Create Account</h2>
+
+  <div class="input-box">
+    <span>👤</span>
+    <input type="text" id="regName" placeholder="Full Name">
+  </div>
+
+  <div class="input-box">
+    <span>✉</span>
+    <input type="email" id="regEmail" placeholder="Email address">
+  </div>
+
+  <div class="input-box">
+    <span>🔒</span>
+    <input type="password" id="regPassword" placeholder="Password">
+  </div>
+
+  <button onclick="register()" class="login-btn">Sign Up</button>
+  <button onclick="showLogin()" class="signup-btn">Back to Login</button>
+</div>
 
   <script src="assets/js/app.js"></script>
 </body>

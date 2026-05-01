@@ -1,0 +1,15 @@
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\bin\Debug\net8.0-windows\ETransportAdmin.exe
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\bin\Debug\net8.0-windows\ETransportAdmin.deps.json
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\bin\Debug\net8.0-windows\ETransportAdmin.runtimeconfig.json
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\bin\Debug\net8.0-windows\ETransportAdmin.dll
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\bin\Debug\net8.0-windows\ETransportAdmin.pdb
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.GeneratedMSBuildEditorConfig.editorconfig
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.AssemblyInfoInputs.cache
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.AssemblyInfo.cs
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.csproj.CoreCompileInputs.cache
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.sourcelink.json
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.dll
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\refint\ETransportAdmin.dll
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.pdb
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ETransportAdmin.genruntimeconfig.cache
+C:\xampp\htdocs\e_transport_system\desktop\ETransportAdmin\obj\Debug\net8.0-windows\ref\ETransportAdmin.dll
