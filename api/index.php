@@ -206,6 +206,131 @@ if ($resource === 'payments' && $method === 'POST') {
     ], 201);
 }
 
+// ADMIN: GET ALL BOOKINGS
+if ($resource === 'admin-bookings' && $method === 'GET') {
+    $sql = "
+        SELECT b.*, u.full_name,
+        r.origin, r.destination
+        FROM bookings b
+        JOIN users u ON u.id = b.user_id
+        JOIN schedules s ON s.id = b.schedule_id
+        JOIN routes r ON r.id = s.route_id
+        ORDER BY b.id DESC
+    ";
+
+    json_response(db()->query($sql)->fetchAll());
+}
+
+// ADMIN: GET ALL PAYMENTS
+if ($resource === 'admin-payments' && $method === 'GET') {
+    $sql = "
+        SELECT p.*, u.full_name,
+        r.origin, r.destination
+        FROM payments p
+        JOIN users u ON u.id = p.user_id
+        JOIN bookings b ON b.id = p.booking_id
+        JOIN schedules s ON s.id = b.schedule_id
+        JOIN routes r ON r.id = s.route_id
+        ORDER BY p.id DESC
+    ";
+
+    json_response(db()->query($sql)->fetchAll());
+}
+
+// ADMIN: GET USERS
+if ($resource === 'admin-users' && $method === 'GET') {
+    $sql = "SELECT id, full_name, email, role_id, created_at FROM users ORDER BY id DESC";
+    json_response(db()->query($sql)->fetchAll());
+}
+
+// ADMIN: REPORTS
+if ($resource === 'admin-reports' && $method === 'GET') {
+    json_response([
+        'total_bookings' => db()->query("SELECT COUNT(*) FROM bookings")->fetchColumn(),
+        'total_payments' => db()->query("SELECT COUNT(*) FROM payments")->fetchColumn(),
+        'total_revenue' => db()->query("SELECT COALESCE(SUM(amount),0) FROM payments")->fetchColumn(),
+        'total_users' => db()->query("SELECT COUNT(*) FROM users")->fetchColumn()
+    ]);
+}
+
+// ADMIN: GET VEHICLES
+if ($resource === 'admin-vehicles' && $method === 'GET') {
+    $sql = "SELECT * FROM vehicles ORDER BY id DESC";
+    json_response(db()->query($sql)->fetchAll());
+}
+
+// ADMIN: ADD VEHICLE
+if ($resource === 'admin-vehicles' && $method === 'POST') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        INSERT INTO vehicles (plate_number, vehicle_type, seat_capacity, status, maintenance_status)
+        VALUES (?,?,?,?,?)
+    ");
+
+    $stmt->execute([
+        $b['plate_number'],
+        $b['vehicle_type'],
+        $b['seat_capacity'],
+        $b['status'] ?? 'Available',
+        $b['maintenance_status'] ?? 'Good'
+    ]);
+
+    json_response([
+        'message' => 'Vehicle added successfully',
+        'id' => db()->lastInsertId()
+    ], 201);
+}
+
+// ADMIN: GET ROUTES
+if ($resource === 'admin-routes' && $method === 'GET') {
+    $sql = "SELECT * FROM routes ORDER BY id DESC";
+    json_response(db()->query($sql)->fetchAll());
+}
+
+// ADMIN: ADD ROUTE
+if ($resource === 'admin-routes' && $method === 'POST') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        INSERT INTO routes (origin, destination, fare)
+        VALUES (?,?,?)
+    ");
+
+    $stmt->execute([
+        $b['origin'],
+        $b['destination'],
+        $b['fare']
+    ]);
+
+    json_response([
+        'message' => 'Route added successfully',
+        'id' => db()->lastInsertId()
+    ], 201);
+}
+
+// ADMIN: ADD SCHEDULE
+if ($resource === 'admin-schedules' && $method === 'POST') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        INSERT INTO schedules (route_id, vehicle_id, departure_time, arrival_time, status)
+        VALUES (?,?,?,?,?)
+    ");
+
+    $stmt->execute([
+        $b['route_id'],
+        $b['vehicle_id'],
+        $b['departure_time'],
+        $b['arrival_time'],
+        $b['status'] ?? 'Active'
+    ]);
+
+    json_response([
+        'message' => 'Schedule added successfully',
+        'id' => db()->lastInsertId()
+    ], 201);
+}
     json_response(['error' => 'Endpoint not found'], 404);
 
 } catch (Throwable $e) {

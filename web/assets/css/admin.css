@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  background: #eef3f8;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  width: 270px;
+  height: 100vh;
+  position: fixed;
+  background: #0f172a;
+  color: white;
+  padding: 28px;
+}
+
+.admin-sidebar h3 {
+  font-weight: 800;
+  margin-bottom: 5px;
+}
+
+.admin-sidebar p {
+  color: #94a3b8;
+  margin-bottom: 35px;
+}
+
+.admin-link {
+  display: block;
+  padding: 14px 16px;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  color: #cbd5e1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.admin-link:hover,
+.admin-link.active {
+  background: #2563eb;
+  color: white;
+}
+
+.logout {
+  margin-top: 40px;
+  color: #fecaca;
+}
+
+.admin-content {
+  margin-left: 270px;
+  padding: 30px;
+  width: calc(100% - 270px);
+}
+
+.admin-hero {
+  background: linear-gradient(135deg, #2563eb, #14b8a6);
+  color: white;
+  padding: 35px;
+  border-radius: 28px;
+}
+
+.admin-hero h1 {
+  font-weight: 800;
+}
+
+.stat-card,
+.panel {
+  background: white;
+  padding: 25px;
+  border-radius: 24px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.stat-card span {
+  font-size: 30px;
+}
+
+.stat-card p {
+  color: #64748b;
+  margin: 12px 0 5px;
+}
+
+.stat-card h2 {
+  color: #2563eb;
+  font-weight: 800;
+}
+
+.panel p {
+  color: #64748b;
+}
+
+.badge-admin {
+  padding: 7px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+}
+
+.paid {
+  background: #16a34a;
+}
+
+.pending {
+  background: #f59e0b;
+}
+
+.cancelled {
+  background: #dc2626;
+}
+
+.empty-box,
+.report-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 25px;
+  border-radius: 18px;
+}
+
+.admin-page {
+  animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

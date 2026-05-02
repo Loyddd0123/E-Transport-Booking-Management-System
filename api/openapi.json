@@ -3,7 +3,7 @@
   "info": {
     "title": "E-Transport Booking & Management System API",
     "version": "1.0.0",
-    "description": "API documentation for login, registration, schedules, bookings, and payments."
+    "description": "API documentation for login, registration, schedules, bookings, payments, and admin dashboard features."
   },
   "servers": [
     {
@@ -11,6 +11,7 @@
     }
   ],
   "paths": {
+
     "/health": {
       "get": {
         "summary": "API Health Check",
@@ -21,6 +22,7 @@
         }
       }
     },
+
     "/login": {
       "post": {
         "summary": "User Login",
@@ -44,6 +46,7 @@
         }
       }
     },
+
     "/register": {
       "post": {
         "summary": "Register Account",
@@ -67,6 +70,7 @@
         }
       }
     },
+
     "/schedules": {
       "get": {
         "summary": "Get Available Schedules",
@@ -75,6 +79,7 @@
         }
       }
     },
+
     "/bookings": {
       "get": {
         "summary": "Get User Bookings",
@@ -113,6 +118,7 @@
         }
       }
     },
+
     "/payments": {
       "get": {
         "summary": "Get User Payments",
@@ -149,6 +155,43 @@
           "201": { "description": "Payment successful" }
         }
       }
+    },
+
+    "/admin-bookings": {
+      "get": {
+        "summary": "Admin - Get All Bookings",
+        "responses": {
+          "200": { "description": "List of all bookings" }
+        }
+      }
+    },
+
+    "/admin-payments": {
+      "get": {
+        "summary": "Admin - Get All Payments",
+        "responses": {
+          "200": { "description": "List of all payments" }
+        }
+      }
+    },
+
+    "/admin-users": {
+      "get": {
+        "summary": "Admin - Get All Users",
+        "responses": {
+          "200": { "description": "List of users" }
+        }
+      }
+    },
+
+    "/admin-reports": {
+      "get": {
+        "summary": "Admin - Dashboard Reports",
+        "responses": {
+          "200": { "description": "Totals: bookings, payments, revenue, users" }
+        }
+      }
     }
+
   }
 }
