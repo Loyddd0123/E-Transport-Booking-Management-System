@@ -9,6 +9,10 @@ async function adminApi(route, options = {}) {
   return res.json();
 }
 
+function safeText(value) {
+  return String(value ?? '').replaceAll("'", "\\'").replaceAll('"', '&quot;');
+}
+
 function showAdminPage(pageId, link) {
   document.querySelectorAll(".admin-page").forEach(page => {
     page.style.display = "none";
@@ -39,12 +43,12 @@ async function loadAdminDashboard() {
   }
 
   await loadReports();
+  await loadAdminRoutes();
+  await loadAdminVehicles();
+  await loadVehicleOptions();
   await loadAdminSchedules();
   await loadAdminBookings();
   await loadAdminPayments();
-  await loadAdminVehicles();
-  await loadAdminRoutes();
-await loadVehicleOptions();
 }
 
 async function loadReports() {
@@ -61,6 +65,211 @@ async function loadReports() {
   document.getElementById("reportUsers").innerText = report.total_users || 0;
 }
 
+async function loadAdminRoutes() {
+  const table = document.getElementById("adminRoutesTable");
+  const routeSelect = document.getElementById("scheduleRoute");
+
+  const data = await adminApi("admin-routes");
+  const routes = Array.isArray(data) ? data : [];
+
+  if (table) {
+    if (routes.length === 0) {
+      table.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No routes found.</td></tr>`;
+    } else {
+      table.innerHTML = routes.map(r => `
+        <tr>
+          <td>${r.id}</td>
+          <td>${r.origin}</td>
+          <td>${r.destination}</td>
+          <td>₱${r.fare}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" onclick="editRoute(${r.id}, '${safeText(r.origin)}', '${safeText(r.destination)}', '${safeText(r.fare)}')">Edit</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteRoute(${r.id})">Delete</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  if (routeSelect) {
+    routeSelect.innerHTML = routes.map(r => `
+      <option value="${r.id}">${r.origin} → ${r.destination}</option>
+    `).join('');
+  }
+}
+
+async function addRoute() {
+  const origin = document.getElementById("routeOrigin").value.trim();
+  const destination = document.getElementById("routeDestination").value.trim();
+  const fare = document.getElementById("routeFare").value.trim();
+
+  if (!origin || !destination || !fare) {
+    alert("Please fill in all route fields.");
+    return;
+  }
+
+  const result = await adminApi("admin-routes", {
+    method: "POST",
+    body: JSON.stringify({ origin, destination, fare })
+  });
+
+  alert(result.message || result.error || "Route saved.");
+
+  document.getElementById("routeOrigin").value = "";
+  document.getElementById("routeDestination").value = "";
+  document.getElementById("routeFare").value = "";
+
+  await loadAdminRoutes();
+  await loadAdminSchedules();
+}
+
+async function editRoute(id, origin, destination, fare) {
+  const newOrigin = prompt("Origin:", origin);
+  const newDestination = prompt("Destination:", destination);
+  const newFare = prompt("Fare:", fare);
+
+  if (!newOrigin || !newDestination || !newFare) return;
+
+  const result = await adminApi("admin-routes", {
+    method: "PUT",
+    body: JSON.stringify({
+      id,
+      origin: newOrigin,
+      destination: newDestination,
+      fare: newFare
+    })
+  });
+
+  alert(result.message || result.error);
+  await loadAdminRoutes();
+  await loadAdminSchedules();
+}
+
+async function deleteRoute(id) {
+  if (!confirm("Delete this route?")) return;
+
+  const result = await adminApi("admin-routes&id=" + id, {
+    method: "DELETE"
+  });
+
+  alert(result.message || result.error);
+  await loadAdminRoutes();
+  await loadAdminSchedules();
+}
+
+async function loadAdminVehicles() {
+  const table = document.getElementById("adminVehiclesTable");
+  if (!table) return;
+
+  const data = await adminApi("admin-vehicles");
+  const vehicles = Array.isArray(data) ? data : [];
+
+  if (vehicles.length === 0) {
+    table.innerHTML = `<tr><td colspan="7" class="text-center text-muted">No vehicles found.</td></tr>`;
+    return;
+  }
+
+  table.innerHTML = vehicles.map(v => `
+    <tr>
+      <td>${v.id}</td>
+      <td>${v.plate_number}</td>
+      <td>${v.vehicle_type}</td>
+      <td>${v.seat_capacity}</td>
+      <td>${v.status}</td>
+      <td>${v.maintenance_status}</td>
+      <td>
+        <button class="btn btn-warning btn-sm" onclick="editVehicle(${v.id}, '${safeText(v.plate_number)}', '${safeText(v.vehicle_type)}', '${safeText(v.seat_capacity)}', '${safeText(v.status)}', '${safeText(v.maintenance_status)}')">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteVehicle(${v.id})">Delete</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+async function loadVehicleOptions() {
+  const vehicleSelect = document.getElementById("scheduleVehicle");
+  if (!vehicleSelect) return;
+
+  const data = await adminApi("admin-vehicles");
+  const vehicles = Array.isArray(data) ? data : [];
+
+  vehicleSelect.innerHTML = vehicles.map(v => `
+    <option value="${v.id}">${v.vehicle_type} - ${v.plate_number}</option>
+  `).join('');
+}
+
+async function addVehicle() {
+  const plate_number = document.getElementById("plateNumber").value.trim();
+  const vehicle_type = document.getElementById("vehicleType").value.trim();
+  const seat_capacity = document.getElementById("seatCapacity").value.trim();
+  const status = document.getElementById("vehicleStatus").value;
+
+  if (!plate_number || !vehicle_type || !seat_capacity) {
+    alert("Please fill in all vehicle fields.");
+    return;
+  }
+
+  const result = await adminApi("admin-vehicles", {
+    method: "POST",
+    body: JSON.stringify({
+      plate_number,
+      vehicle_type,
+      seat_capacity,
+      status,
+      maintenance_status: "Good"
+    })
+  });
+
+  alert(result.message || result.error || "Vehicle saved.");
+
+  document.getElementById("plateNumber").value = "";
+  document.getElementById("vehicleType").value = "";
+  document.getElementById("seatCapacity").value = "";
+
+  await loadAdminVehicles();
+  await loadVehicleOptions();
+  await loadAdminSchedules();
+}
+
+async function editVehicle(id, plate, type, seats, status, maintenance) {
+  const newPlate = prompt("Plate Number:", plate);
+  const newType = prompt("Vehicle Type:", type);
+  const newSeats = prompt("Seat Capacity:", seats);
+  const newStatus = prompt("Status:", status);
+  const newMaintenance = prompt("Maintenance:", maintenance);
+
+  if (!newPlate || !newType || !newSeats || !newStatus || !newMaintenance) return;
+
+  const result = await adminApi("admin-vehicles", {
+    method: "PUT",
+    body: JSON.stringify({
+      id,
+      plate_number: newPlate,
+      vehicle_type: newType,
+      seat_capacity: newSeats,
+      status: newStatus,
+      maintenance_status: newMaintenance
+    })
+  });
+
+  alert(result.message || result.error);
+  await loadAdminVehicles();
+  await loadVehicleOptions();
+  await loadAdminSchedules();
+}
+
+async function deleteVehicle(id) {
+  if (!confirm("Delete this vehicle?")) return;
+
+  const result = await adminApi("admin-vehicles&id=" + id, {
+    method: "DELETE"
+  });
+
+  alert(result.message || result.error);
+  await loadAdminVehicles();
+  await loadVehicleOptions();
+  await loadAdminSchedules();
+}
+
 async function loadAdminSchedules() {
   const table = document.getElementById("adminSchedulesTable");
   if (!table) return;
@@ -69,19 +278,86 @@ async function loadAdminSchedules() {
   const schedules = Array.isArray(data) ? data : [];
 
   if (schedules.length === 0) {
-    table.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No schedules found.</td></tr>`;
+    table.innerHTML = `<tr><td colspan="7" class="text-center text-muted">No schedules found.</td></tr>`;
     return;
   }
 
   table.innerHTML = schedules.map(s => `
     <tr>
+      <td>${s.id}</td>
       <td><b>${s.origin}</b> → ${s.destination}</td>
       <td>${s.departure_time}</td>
       <td>${s.vehicle_type}</td>
       <td>${s.available_seats}</td>
       <td>₱${s.fare}</td>
+      <td>
+        <button class="btn btn-warning btn-sm" onclick="editSchedule(${s.id})">Edit</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteSchedule(${s.id})">Delete</button>
+      </td>
     </tr>
   `).join('');
+}
+
+async function addSchedule() {
+  const route_id = document.getElementById("scheduleRoute").value;
+  const vehicle_id = document.getElementById("scheduleVehicle").value;
+  const departure_time = document.getElementById("departureTime").value;
+
+  if (!route_id || !vehicle_id || !departure_time) {
+    alert("Please select route, vehicle, and departure date/time.");
+    return;
+  }
+
+  const result = await adminApi("admin-schedules", {
+    method: "POST",
+    body: JSON.stringify({
+      route_id,
+      vehicle_id,
+      departure_time,
+      arrival_time: departure_time,
+      status: "Active"
+    })
+  });
+
+  alert(result.message || result.error || "Schedule saved.");
+
+  document.getElementById("departureTime").value = "";
+
+  await loadAdminSchedules();
+}
+
+async function editSchedule(id) {
+  const route_id = prompt("Enter new Route ID:");
+  const vehicle_id = prompt("Enter new Vehicle ID:");
+  const departure_time = prompt("Enter departure time: YYYY-MM-DD HH:MM:SS");
+
+  if (!route_id || !vehicle_id || !departure_time) return;
+
+  const result = await adminApi("admin-schedules", {
+    method: "PUT",
+    body: JSON.stringify({
+      id,
+      route_id,
+      vehicle_id,
+      departure_time,
+      arrival_time: departure_time,
+      status: "Active"
+    })
+  });
+
+  alert(result.message || result.error);
+  await loadAdminSchedules();
+}
+
+async function deleteSchedule(id) {
+  if (!confirm("Delete this schedule?")) return;
+
+  const result = await adminApi("admin-schedules&id=" + id, {
+    method: "DELETE"
+  });
+
+  alert(result.message || result.error);
+  await loadAdminSchedules();
 }
 
 async function loadAdminBookings() {
@@ -138,173 +414,4 @@ function getAdminStatusClass(status) {
   if (status === "cancelled") return "cancelled";
 
   return "pending";
-}
-
-async function loadAdminVehicles() {
-  const table = document.getElementById("adminVehiclesTable");
-  if (!table) return;
-
-  const data = await adminApi("admin-vehicles");
-  const vehicles = Array.isArray(data) ? data : [];
-
-  if (vehicles.length === 0) {
-    table.innerHTML = `
-      <tr>
-        <td colspan="6" class="text-center text-muted">
-          No vehicles found.
-        </td>
-      </tr>
-    `;
-    return;
-  }
-
-  table.innerHTML = vehicles.map(v => `
-    <tr>
-      <td>${v.id}</td>
-      <td>${v.plate_number}</td>
-      <td>${v.vehicle_type}</td>
-      <td>${v.seat_capacity}</td>
-      <td>${v.status}</td>
-      <td>${v.maintenance_status}</td>
-    </tr>
-  `).join('');
-}
-
-async function addVehicle() {
-  const plate_number = document.getElementById("plateNumber").value.trim();
-  const vehicle_type = document.getElementById("vehicleType").value.trim();
-  const seat_capacity = document.getElementById("seatCapacity").value.trim();
-  const status = document.getElementById("vehicleStatus").value;
-
-  if (!plate_number || !vehicle_type || !seat_capacity) {
-    alert("Please fill in all vehicle fields.");
-    return;
-  }
-
-  const result = await adminApi("admin-vehicles", {
-    method: "POST",
-    body: JSON.stringify({
-      plate_number,
-      vehicle_type,
-      seat_capacity,
-      status,
-      maintenance_status: "Good"
-    })
-  });
-
-  if (result.error) {
-    alert(result.error);
-    return;
-  }
-
-  alert("Vehicle added successfully.");
-
-  document.getElementById("plateNumber").value = "";
-  document.getElementById("vehicleType").value = "";
-  document.getElementById("seatCapacity").value = "";
-
-  loadAdminVehicles();
-}
-
-async function loadAdminRoutes() {
-  const table = document.getElementById("adminRoutesTable");
-  const routeSelect = document.getElementById("scheduleRoute");
-
-  const data = await adminApi("admin-routes");
-  const routes = Array.isArray(data) ? data : [];
-
-  if (table) {
-    table.innerHTML = routes.map(r => `
-      <tr>
-        <td>${r.id}</td>
-        <td>${r.origin}</td>
-        <td>${r.destination}</td>
-        <td>₱${r.fare}</td>
-      </tr>
-    `).join('');
-  }
-
-  if (routeSelect) {
-    routeSelect.innerHTML = routes.map(r => `
-      <option value="${r.id}">
-        ${r.origin} → ${r.destination}
-      </option>
-    `).join('');
-  }
-}
-
-async function loadVehicleOptions() {
-  const vehicleSelect = document.getElementById("scheduleVehicle");
-  if (!vehicleSelect) return;
-
-  const data = await adminApi("admin-vehicles");
-  const vehicles = Array.isArray(data) ? data : [];
-
-  vehicleSelect.innerHTML = vehicles.map(v => `
-    <option value="${v.id}">
-      ${v.vehicle_type} - ${v.plate_number}
-    </option>
-  `).join('');
-}
-
-async function addRoute() {
-  const origin = document.getElementById("routeOrigin").value.trim();
-  const destination = document.getElementById("routeDestination").value.trim();
-  const fare = document.getElementById("routeFare").value.trim();
-
-  if (!origin || !destination || !fare) {
-    alert("Please fill in all route fields.");
-    return;
-  }
-
-  const result = await adminApi("admin-routes", {
-    method: "POST",
-    body: JSON.stringify({ origin, destination, fare })
-  });
-
-  if (result.error) {
-    alert(result.error);
-    return;
-  }
-
-  alert("Route added successfully.");
-
-  document.getElementById("routeOrigin").value = "";
-  document.getElementById("routeDestination").value = "";
-  document.getElementById("routeFare").value = "";
-
-  await loadAdminRoutes();
-}
-
-async function addSchedule() {
-  const route_id = document.getElementById("scheduleRoute").value;
-  const vehicle_id = document.getElementById("scheduleVehicle").value;
-  const departure_time = document.getElementById("departureTime").value;
-
-  if (!route_id || !vehicle_id || !departure_time) {
-    alert("Please select route, vehicle, and departure date/time.");
-    return;
-  }
-
-  const result = await adminApi("admin-schedules", {
-    method: "POST",
-    body: JSON.stringify({
-      route_id,
-      vehicle_id,
-      departure_time,
-      arrival_time: departure_time,
-      status: "Active"
-    })
-  });
-
-  if (result.error) {
-    alert(result.error);
-    return;
-  }
-
-  alert("Schedule added successfully.");
-
-  document.getElementById("departureTime").value = "";
-
-  await loadAdminSchedules();
 }

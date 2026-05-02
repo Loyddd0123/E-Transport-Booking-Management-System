@@ -3,28 +3,36 @@
   "info": {
     "title": "E-Transport Booking & Management System API",
     "version": "1.0.0",
-    "description": "API documentation for login, registration, schedules, bookings, payments, and admin dashboard features."
+    "description": "API documentation for login, registration, schedules, bookings, payments, admin dashboard, and CRUD management features."
   },
   "servers": [
     {
       "url": "http://localhost/e_transport_system/api/index.php?r="
     }
   ],
+  "tags": [
+    { "name": "System" },
+    { "name": "Authentication" },
+    { "name": "Schedules" },
+    { "name": "Bookings" },
+    { "name": "Payments" },
+    { "name": "Admin Dashboard" },
+    { "name": "Admin Management" },
+    { "name": "Admin CRUD" }
+  ],
   "paths": {
-
     "/health": {
       "get": {
+        "tags": ["System"],
         "summary": "API Health Check",
         "responses": {
-          "200": {
-            "description": "API running"
-          }
+          "200": { "description": "API running" }
         }
       }
     },
-
     "/login": {
       "post": {
+        "tags": ["Authentication"],
         "summary": "User Login",
         "requestBody": {
           "required": true,
@@ -46,9 +54,9 @@
         }
       }
     },
-
     "/register": {
       "post": {
+        "tags": ["Authentication"],
         "summary": "Register Account",
         "requestBody": {
           "required": true,
@@ -70,18 +78,18 @@
         }
       }
     },
-
     "/schedules": {
       "get": {
+        "tags": ["Schedules"],
         "summary": "Get Available Schedules",
         "responses": {
           "200": { "description": "List of schedules" }
         }
       }
     },
-
     "/bookings": {
       "get": {
+        "tags": ["Bookings"],
         "summary": "Get User Bookings",
         "parameters": [
           {
@@ -96,6 +104,7 @@
         }
       },
       "post": {
+        "tags": ["Bookings"],
         "summary": "Create Booking",
         "requestBody": {
           "required": true,
@@ -118,9 +127,9 @@
         }
       }
     },
-
     "/payments": {
       "get": {
+        "tags": ["Payments"],
         "summary": "Get User Payments",
         "parameters": [
           {
@@ -135,6 +144,7 @@
         }
       },
       "post": {
+        "tags": ["Payments"],
         "summary": "Create Payment",
         "requestBody": {
           "required": true,
@@ -156,42 +166,249 @@
         }
       }
     },
-
+    "/admin-reports": {
+      "get": {
+        "tags": ["Admin Dashboard"],
+        "summary": "Admin - Dashboard Reports",
+        "responses": {
+          "200": { "description": "Totals: bookings, payments, revenue, users" }
+        }
+      }
+    },
     "/admin-bookings": {
       "get": {
+        "tags": ["Admin Management"],
         "summary": "Admin - Get All Bookings",
         "responses": {
           "200": { "description": "List of all bookings" }
         }
       }
     },
-
     "/admin-payments": {
       "get": {
+        "tags": ["Admin Management"],
         "summary": "Admin - Get All Payments",
         "responses": {
           "200": { "description": "List of all payments" }
         }
       }
     },
-
     "/admin-users": {
       "get": {
+        "tags": ["Admin Management"],
         "summary": "Admin - Get All Users",
         "responses": {
           "200": { "description": "List of users" }
         }
       }
     },
-
-    "/admin-reports": {
+    "/admin-routes": {
       "get": {
-        "summary": "Admin - Dashboard Reports",
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Get All Routes",
         "responses": {
-          "200": { "description": "Totals: bookings, payments, revenue, users" }
+          "200": { "description": "List of routes" }
+        }
+      },
+      "post": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Add Route",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "origin": { "type": "string", "example": "City Terminal" },
+                  "destination": { "type": "string", "example": "Airport" },
+                  "fare": { "type": "number", "example": 180 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Route added successfully" }
+        }
+      },
+      "put": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Update Route",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "origin": { "type": "string", "example": "City Terminal" },
+                  "destination": { "type": "string", "example": "Airport" },
+                  "fare": { "type": "number", "example": 180 }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Route updated" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Delete Route",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "example": 1 }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Route deleted" }
+        }
+      }
+    },
+    "/admin-vehicles": {
+      "get": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Get All Vehicles",
+        "responses": {
+          "200": { "description": "List of vehicles" }
+        }
+      },
+      "post": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Add Vehicle",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "plate_number": { "type": "string", "example": "ABC-1234" },
+                  "vehicle_type": { "type": "string", "example": "Van" },
+                  "seat_capacity": { "type": "integer", "example": 14 },
+                  "status": { "type": "string", "example": "Available" },
+                  "maintenance_status": { "type": "string", "example": "Good" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Vehicle added successfully" }
+        }
+      },
+      "put": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Update Vehicle",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "plate_number": { "type": "string", "example": "ABC-1234" },
+                  "vehicle_type": { "type": "string", "example": "Van" },
+                  "seat_capacity": { "type": "integer", "example": 14 },
+                  "status": { "type": "string", "example": "Available" },
+                  "maintenance_status": { "type": "string", "example": "Good" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Vehicle updated" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Delete Vehicle",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "example": 1 }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Vehicle deleted" }
+        }
+      }
+    },
+    "/admin-schedules": {
+      "post": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Add Schedule",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "route_id": { "type": "integer", "example": 1 },
+                  "vehicle_id": { "type": "integer", "example": 1 },
+                  "departure_time": { "type": "string", "example": "2026-06-02 01:00:00" },
+                  "arrival_time": { "type": "string", "example": "2026-06-02 01:00:00" },
+                  "status": { "type": "string", "example": "Active" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Schedule added successfully" }
+        }
+      },
+      "put": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Update Schedule",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": { "type": "integer", "example": 1 },
+                  "route_id": { "type": "integer", "example": 1 },
+                  "vehicle_id": { "type": "integer", "example": 1 },
+                  "departure_time": { "type": "string", "example": "2026-06-02 01:00:00" },
+                  "arrival_time": { "type": "string", "example": "2026-06-02 01:00:00" },
+                  "status": { "type": "string", "example": "Active" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Schedule updated" }
+        }
+      },
+      "delete": {
+        "tags": ["Admin CRUD"],
+        "summary": "Admin - Delete Schedule",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "integer", "example": 1 }
+          }
+        ],
+        "responses": {
+          "200": { "description": "Schedule deleted" }
         }
       }
     }
-
   }
 }

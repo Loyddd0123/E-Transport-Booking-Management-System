@@ -35,167 +35,121 @@
       </div>
 
       <div class="row g-4 mt-3">
-        <div class="col-md-3">
-          <div class="stat-card">
-            <span>🎫</span>
-            <p>Total Bookings</p>
-            <h2 id="totalBookings">0</h2>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="stat-card">
-            <span>💳</span>
-            <p>Total Payments</p>
-            <h2 id="totalPayments">0</h2>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="stat-card">
-            <span>₱</span>
-            <p>Total Revenue</p>
-            <h2 id="totalRevenue">0</h2>
-          </div>
-        </div>
-
-        <div class="col-md-3">
-          <div class="stat-card">
-            <span>👥</span>
-            <p>Total Users</p>
-            <h2 id="totalUsers">0</h2>
-          </div>
-        </div>
+        <div class="col-md-3"><div class="stat-card"><span>🎫</span><p>Total Bookings</p><h2 id="totalBookings">0</h2></div></div>
+        <div class="col-md-3"><div class="stat-card"><span>💳</span><p>Total Payments</p><h2 id="totalPayments">0</h2></div></div>
+        <div class="col-md-3"><div class="stat-card"><span>₱</span><p>Total Revenue</p><h2 id="totalRevenue">0</h2></div></div>
+        <div class="col-md-3"><div class="stat-card"><span>👥</span><p>Total Users</p><h2 id="totalUsers">0</h2></div></div>
       </div>
     </section>
 
-   <section id="manageSchedules" class="admin-page" style="display:none;">
-  <div class="panel">
+    <section id="manageSchedules" class="admin-page" style="display:none;">
+      <div class="panel">
 
-    <h3>Manage Routes</h3>
-    <p>Add routes used for transport schedules.</p>
+        <h3>Manage Routes</h3>
+        <p>Add, edit, and delete routes used for schedules.</p>
 
-    <div class="row g-3 mb-4">
-      <div class="col-md-4">
-        <input type="text" id="routeOrigin" class="form-control" placeholder="Origin">
+        <div class="row g-3 mb-4">
+          <div class="col-md-4"><input type="text" id="routeOrigin" class="form-control" placeholder="Origin"></div>
+          <div class="col-md-4"><input type="text" id="routeDestination" class="form-control" placeholder="Destination"></div>
+          <div class="col-md-2"><input type="number" id="routeFare" class="form-control" placeholder="Fare"></div>
+          <div class="col-md-2"><button class="btn btn-primary w-100" onclick="addRoute()">Add Route</button></div>
+        </div>
+
+        <div class="table-responsive mb-5">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Origin</th>
+                <th>Destination</th>
+                <th>Fare</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminRoutesTable"></tbody>
+          </table>
+        </div>
+
+        <hr>
+
+        <h3>Manage Vehicles</h3>
+        <p>Add, edit, and delete vehicles used for schedules.</p>
+
+        <div class="row g-3 mb-4">
+          <div class="col-md-3"><input type="text" id="plateNumber" class="form-control" placeholder="Plate Number"></div>
+          <div class="col-md-3"><input type="text" id="vehicleType" class="form-control" placeholder="Vehicle Type"></div>
+          <div class="col-md-2"><input type="number" id="seatCapacity" class="form-control" placeholder="Seats"></div>
+          <div class="col-md-2">
+            <select id="vehicleStatus" class="form-control">
+              <option value="Available">Available</option>
+              <option value="Unavailable">Unavailable</option>
+            </select>
+          </div>
+          <div class="col-md-2"><button class="btn btn-success w-100" onclick="addVehicle()">Add Vehicle</button></div>
+        </div>
+
+        <div class="table-responsive mb-5">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Plate Number</th>
+                <th>Vehicle Type</th>
+                <th>Seat Capacity</th>
+                <th>Status</th>
+                <th>Maintenance</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminVehiclesTable"></tbody>
+          </table>
+        </div>
+
+        <hr>
+
+        <h3>Manage Schedules</h3>
+        <p>Create, edit, and delete schedules using route and vehicle.</p>
+
+        <div class="row g-3 mb-4 align-items-end">
+          <div class="col-md-3">
+            <label class="form-label">Route</label>
+            <select id="scheduleRoute" class="form-control"></select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Vehicle</label>
+            <select id="scheduleVehicle" class="form-control"></select>
+          </div>
+
+          <div class="col-md-3">
+            <label class="form-label">Departure Date & Time</label>
+            <input type="datetime-local" id="departureTime" class="form-control">
+          </div>
+
+          <div class="col-md-3">
+            <button class="btn btn-primary w-100" onclick="addSchedule()">Add Schedule</button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Route</th>
+                <th>Departure</th>
+                <th>Vehicle</th>
+                <th>Available Seats</th>
+                <th>Fare</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminSchedulesTable"></tbody>
+          </table>
+        </div>
+
       </div>
-
-      <div class="col-md-4">
-        <input type="text" id="routeDestination" class="form-control" placeholder="Destination">
-      </div>
-
-      <div class="col-md-2">
-        <input type="number" id="routeFare" class="form-control" placeholder="Fare">
-      </div>
-
-      <div class="col-md-2">
-        <button class="btn btn-primary w-100" onclick="addRoute()">Add Route</button>
-      </div>
-    </div>
-
-    <div class="table-responsive mb-5">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Origin</th>
-            <th>Destination</th>
-            <th>Fare</th>
-          </tr>
-        </thead>
-        <tbody id="adminRoutesTable"></tbody>
-      </table>
-    </div>
-
-    <hr>
-
-    <h3>Manage Vehicles</h3>
-    <p>Add vehicles used for schedules.</p>
-
-    <div class="row g-3 mb-4">
-      <div class="col-md-3">
-        <input type="text" id="plateNumber" class="form-control" placeholder="Plate Number">
-      </div>
-
-      <div class="col-md-3">
-        <input type="text" id="vehicleType" class="form-control" placeholder="Vehicle Type">
-      </div>
-
-      <div class="col-md-2">
-        <input type="number" id="seatCapacity" class="form-control" placeholder="Seats">
-      </div>
-
-      <div class="col-md-2">
-        <select id="vehicleStatus" class="form-control">
-          <option value="Available">Available</option>
-          <option value="Unavailable">Unavailable</option>
-        </select>
-      </div>
-
-      <div class="col-md-2">
-        <button class="btn btn-success w-100" onclick="addVehicle()">Add Vehicle</button>
-      </div>
-    </div>
-
-    <div class="table-responsive mb-5">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Plate Number</th>
-            <th>Vehicle Type</th>
-            <th>Seat Capacity</th>
-            <th>Status</th>
-            <th>Maintenance</th>
-          </tr>
-        </thead>
-        <tbody id="adminVehiclesTable"></tbody>
-      </table>
-    </div>
-
-    <hr>
-
-    <h3>Manage Schedules</h3>
-    <p>Create schedules using selected route and vehicle.</p>
-
-    <div class="row g-3 mb-4 align-items-end">
-      <div class="col-md-3">
-        <label class="form-label">Route</label>
-        <select id="scheduleRoute" class="form-control"></select>
-      </div>
-
-      <div class="col-md-3">
-        <label class="form-label">Vehicle</label>
-        <select id="scheduleVehicle" class="form-control"></select>
-      </div>
-
-      <div class="col-md-3">
-        <label class="form-label">Departure Date & Time</label>
-        <input type="datetime-local" id="departureTime" class="form-control">
-      </div>
-
-      <div class="col-md-3">
-        <button class="btn btn-primary w-100" onclick="addSchedule()">Add Schedule</button>
-      </div>
-    </div>
-
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr>
-            <th>Route</th>
-            <th>Departure</th>
-            <th>Vehicle</th>
-            <th>Available Seats</th>
-            <th>Fare</th>
-          </tr>
-        </thead>
-        <tbody id="adminSchedulesTable"></tbody>
-      </table>
-    </div>
-
-  </div>
-</section>
+    </section>
 
     <section id="manageBookings" class="admin-page" style="display:none;">
       <div class="panel">

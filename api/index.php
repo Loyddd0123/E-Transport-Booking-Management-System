@@ -331,6 +331,174 @@ if ($resource === 'admin-schedules' && $method === 'POST') {
         'id' => db()->lastInsertId()
     ], 201);
 }
+
+// UPDATE ROUTE
+if ($resource === 'admin-routes' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("UPDATE routes SET origin=?, destination=?, fare=? WHERE id=?");
+    $stmt->execute([$b['origin'], $b['destination'], $b['fare'], $b['id']]);
+
+    json_response(['message' => 'Route updated successfully']);
+}
+
+// DELETE ROUTE
+if ($resource === 'admin-routes' && $method === 'DELETE') {
+    $id = $_GET['id'] ?? null;
+
+    $stmt = db()->prepare("DELETE FROM routes WHERE id=?");
+    $stmt->execute([$id]);
+
+    json_response(['message' => 'Route deleted successfully']);
+}
+
+// UPDATE VEHICLE
+if ($resource === 'admin-vehicles' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        UPDATE vehicles 
+        SET plate_number=?, vehicle_type=?, seat_capacity=?, status=?, maintenance_status=?
+        WHERE id=?
+    ");
+
+    $stmt->execute([
+        $b['plate_number'],
+        $b['vehicle_type'],
+        $b['seat_capacity'],
+        $b['status'],
+        $b['maintenance_status'],
+        $b['id']
+    ]);
+
+    json_response(['message' => 'Vehicle updated successfully']);
+}
+
+// DELETE VEHICLE
+if ($resource === 'admin-vehicles' && $method === 'DELETE') {
+    $id = $_GET['id'] ?? null;
+
+    $stmt = db()->prepare("DELETE FROM vehicles WHERE id=?");
+    $stmt->execute([$id]);
+
+    json_response(['message' => 'Vehicle deleted successfully']);
+}
+
+// UPDATE SCHEDULE
+if ($resource === 'admin-schedules' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        UPDATE schedules 
+        SET route_id=?, vehicle_id=?, departure_time=?, arrival_time=?, status=?
+        WHERE id=?
+    ");
+
+    $stmt->execute([
+        $b['route_id'],
+        $b['vehicle_id'],
+        $b['departure_time'],
+        $b['arrival_time'],
+        $b['status'],
+        $b['id']
+    ]);
+
+    json_response(['message' => 'Schedule updated successfully']);
+}
+
+// DELETE SCHEDULE
+if ($resource === 'admin-schedules' && $method === 'DELETE') {
+    $id = $_GET['id'] ?? null;
+
+    $stmt = db()->prepare("DELETE FROM schedules WHERE id=?");
+    $stmt->execute([$id]);
+
+    json_response(['message' => 'Schedule deleted successfully']);
+}
+
+// UPDATE ROUTE
+if ($resource === 'admin-routes' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("UPDATE routes SET origin=?, destination=?, fare=? WHERE id=?");
+    $stmt->execute([$b['origin'], $b['destination'], $b['fare'], $b['id']]);
+
+    json_response(['message' => 'Route updated']);
+}
+
+// DELETE ROUTE
+if ($resource === 'admin-routes' && $method === 'DELETE') {
+    $id = $_GET['id'] ?? null;
+
+    $stmt = db()->prepare("DELETE FROM routes WHERE id=?");
+    $stmt->execute([$id]);
+
+    json_response(['message' => 'Route deleted']);
+}
+
+// UPDATE VEHICLE
+if ($resource === 'admin-vehicles' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        UPDATE vehicles 
+        SET plate_number=?, vehicle_type=?, seat_capacity=?, status=?, maintenance_status=?
+        WHERE id=?
+    ");
+
+    $stmt->execute([
+        $b['plate_number'],
+        $b['vehicle_type'],
+        $b['seat_capacity'],
+        $b['status'],
+        $b['maintenance_status'],
+        $b['id']
+    ]);
+
+    json_response(['message' => 'Vehicle updated']);
+}
+
+// DELETE VEHICLE
+if ($resource === 'admin-vehicles' && $method === 'DELETE') {
+    $id = $_GET['id'] ?? null;
+
+    $stmt = db()->prepare("DELETE FROM vehicles WHERE id=?");
+    $stmt->execute([$id]);
+
+    json_response(['message' => 'Vehicle deleted']);
+}
+
+// UPDATE SCHEDULE
+if ($resource === 'admin-schedules' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("
+        UPDATE schedules 
+        SET route_id=?, vehicle_id=?, departure_time=?, arrival_time=?, status=?
+        WHERE id=?
+    ");
+
+    $stmt->execute([
+        $b['route_id'],
+        $b['vehicle_id'],
+        $b['departure_time'],
+        $b['arrival_time'],
+        $b['status'],
+        $b['id']
+    ]);
+
+    json_response(['message' => 'Schedule updated']);
+}
+
+// DELETE SCHEDULE
+if ($resource === 'admin-schedules' && $method === 'DELETE') {
+    $id = $_GET['id'] ?? null;
+
+    $stmt = db()->prepare("DELETE FROM schedules WHERE id=?");
+    $stmt->execute([$id]);
+
+    json_response(['message' => 'Schedule deleted']);
+}
     json_response(['error' => 'Endpoint not found'], 404);
 
 } catch (Throwable $e) {

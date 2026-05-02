@@ -1,0 +1,15 @@
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\bin\Debug\net9.0\ETransportConsole.exe
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\bin\Debug\net9.0\ETransportConsole.deps.json
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\bin\Debug\net9.0\ETransportConsole.runtimeconfig.json
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\bin\Debug\net9.0\ETransportConsole.dll
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\bin\Debug\net9.0\ETransportConsole.pdb
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.GeneratedMSBuildEditorConfig.editorconfig
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.AssemblyInfoInputs.cache
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.AssemblyInfo.cs
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.csproj.CoreCompileInputs.cache
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.sourcelink.json
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.dll
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\refint\ETransportConsole.dll
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.pdb
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ETransportConsole.genruntimeconfig.cache
+C:\xampp\htdocs\e_transport_system\console\ETransportConsole\obj\Debug\net9.0\ref\ETransportConsole.dll
