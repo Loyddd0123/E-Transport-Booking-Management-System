@@ -12,68 +12,104 @@
 
 <div class="dashboard-layout">
 
-  <aside class="sidebar">
-    <div class="logo">🚌 E-Transport</div>
+  <aside class="sidebar modern-sidebar">
+    <div class="logo-area">
+      <div class="logo-icon">🚌</div>
+      <h2>E-Transport</h2>
+    </div>
 
-    <a class="nav-link active" href="javascript:void(0)" onclick="showPage('dashboardPage', this)">Dashboard</a>
-<a class="nav-link" href="javascript:void(0)" onclick="showPage('schedulesPage', this)">Available Schedules</a>
-<a class="nav-link" href="javascript:void(0)" onclick="showPage('bookingsPage', this)">My Bookings</a>
-<a class="nav-link" href="javascript:void(0)" onclick="showPage('paymentsPage', this)">Payments</a>
-<a class="nav-link" href="javascript:void(0)" onclick="showPage('profilePage', this)">Profile</a>
-<a class="nav-link" href="javascript:void(0)" onclick="confirmLogout()">Logout</a>
+    <a class="nav-link active" href="javascript:void(0)" onclick="showPage('dashboardPage', this)">🏠 Dashboard</a>
+    <a class="nav-link" href="javascript:void(0)" onclick="showPage('schedulesPage', this)">📅 Available Schedules</a>
+    <a class="nav-link" href="javascript:void(0)" onclick="showPage('bookingsPage', this)">🎫 My Bookings</a>
+    <a class="nav-link" href="javascript:void(0)" onclick="showPage('paymentsPage', this)">💳 Payments</a>
+    <a class="nav-link" href="javascript:void(0)" onclick="showPage('profilePage', this)">👤 Profile</a>
+
+    <div class="sidebar-footer">
+      <a class="nav-link logout-link" href="javascript:void(0)" onclick="confirmLogout()">↪ Logout</a>
+    </div>
   </aside>
 
-  <main class="content">
+  <main class="content modern-content">
 
-    <!-- DASHBOARD -->
+    <header class="topbar">
+      <div>
+        <h4 id="pageTitle">Dashboard</h4>
+      </div>
+
+      <div class="topbar-right">
+        <div class="bell">🔔<span>2</span></div>
+        <div class="user-pill">
+          <div class="avatar" id="userInitial">SP</div>
+          <span id="topUserName">Sample Passenger</span>
+        </div>
+      </div>
+    </header>
+
     <section id="dashboardPage" class="page-section">
-      <div class="hero-dashboard">
+
+      <div class="hero-dashboard modern-hero">
         <div>
           <h1 id="welcomeText">Welcome, Passenger</h1>
           <p>Manage your trips and bookings easily.</p>
-          <button onclick="loadDashboard()" class="btn btn-light">Refresh</button>
+          <button onclick="loadDashboard()" class="refresh-btn">↻ Refresh</button>
         </div>
-        <img src="https://cdn-icons-png.flaticon.com/512/3448/3448339.png" alt="Transport">
+
+        <div class="hero-art">
+          <div class="city"></div>
+          <div class="bus-card">🚌</div>
+        </div>
       </div>
 
       <div class="row g-4 mt-4">
         <div class="col-md-3">
-          <div class="info-card">
-            <span>🗓️</span>
+          <div class="info-card modern-card blue-card" onclick="showPage('schedulesPage', document.querySelectorAll('.nav-link')[1])">
+            <div class="card-icon">📅</div>
             <p>Available Trips</p>
-            <h2 id="tripCount">0</h2>
+            <div class="card-bottom">
+              <h2 id="tripCount">0</h2>
+              <span>→</span>
+            </div>
           </div>
         </div>
 
         <div class="col-md-3">
-          <div class="info-card">
-            <span>🎫</span>
+          <div class="info-card modern-card orange-card" onclick="showPage('bookingsPage', document.querySelectorAll('.nav-link')[2])">
+            <div class="card-icon">🎫</div>
             <p>My Bookings</p>
-            <h2 id="bookingCount">0</h2>
+            <div class="card-bottom">
+              <h2 id="bookingCount">0</h2>
+              <span>→</span>
+            </div>
           </div>
         </div>
 
         <div class="col-md-3">
-          <div class="info-card">
-            <span>💳</span>
+          <div class="info-card modern-card cyan-card" onclick="showPage('paymentsPage', document.querySelectorAll('.nav-link')[3])">
+            <div class="card-icon">💳</div>
             <p>Payments</p>
-            <h2 id="paymentCount">0</h2>
+            <div class="card-bottom">
+              <h2 id="paymentCount">0</h2>
+              <span>→</span>
+            </div>
           </div>
         </div>
 
         <div class="col-md-3">
-          <div class="info-card">
-            <span>✅</span>
+          <div class="info-card modern-card green-card">
+            <div class="card-icon">✅</div>
             <p>Completed Trips</p>
-            <h2 id="completedCount">0</h2>
+            <div class="card-bottom">
+              <h2 id="completedCount">0</h2>
+              <span>→</span>
+            </div>
           </div>
         </div>
       </div>
+
     </section>
 
-    <!-- SCHEDULES -->
     <section id="schedulesPage" class="page-section" style="display:none;">
-      <div class="panel">
+      <div class="panel modern-panel">
         <div class="panel-header">
           <div>
             <h3>Available Schedules</h3>
@@ -100,9 +136,8 @@
       </div>
     </section>
 
-    <!-- BOOKINGS -->
     <section id="bookingsPage" class="page-section" style="display:none;">
-      <div class="panel">
+      <div class="panel modern-panel">
         <div class="panel-header">
           <div>
             <h3>My Bookings</h3>
@@ -128,37 +163,35 @@
       </div>
     </section>
 
-    <!-- PAYMENTS -->
     <section id="paymentsPage" class="page-section" style="display:none;">
-  <div class="panel">
-    <div class="panel-header">
-      <div>
-        <h3>Payments</h3>
-        <p>View your payment records.</p>
+      <div class="panel modern-panel">
+        <div class="panel-header">
+          <div>
+            <h3>Payments</h3>
+            <p>View your payment records.</p>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Booking ID</th>
+                <th>Route</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsTable"></tbody>
+          </table>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="table-responsive">
-      <table class="table table-hover align-middle">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Booking ID</th>
-            <th>Route</th>
-            <th>Amount</th>
-            <th>Method</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="paymentsTable"></tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-    <!-- PROFILE -->
     <section id="profilePage" class="page-section" style="display:none;">
-      <div class="panel profile-panel">
+      <div class="panel modern-panel profile-panel">
         <h3>My Profile</h3>
         <p>Manage your account information.</p>
 

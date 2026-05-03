@@ -563,3 +563,405 @@ body {
   margin-bottom: 25px;
 }
 
+.dashboard-body {
+  background: #f3f7fc;
+  font-family: "Segoe UI", sans-serif;
+  overflow-x: hidden;
+}
+
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.modern-sidebar {
+  width: 280px;
+  height: 100vh;
+  position: fixed;
+  padding: 32px 24px;
+  background: linear-gradient(180deg, #071b3a, #081224);
+  color: white;
+  overflow: hidden;
+}
+
+.modern-sidebar::after {
+  content: "🚌";
+  position: absolute;
+  bottom: 35px;
+  left: 55px;
+  font-size: 80px;
+  opacity: 0.18;
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 45px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  background: #f43f5e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.logo-area h2 {
+  font-size: 26px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.modern-sidebar .nav-link {
+  display: block;
+  color: #dbeafe;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modern-sidebar .nav-link:hover,
+.modern-sidebar .nav-link.active {
+  background: linear-gradient(135deg, #2563eb, #4f46e5);
+  color: white;
+  box-shadow: 0 12px 30px rgba(37, 99, 235, .35);
+}
+
+.sidebar-footer {
+  margin-top: 40px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(255,255,255,.12);
+}
+
+.logout-link {
+  color: #fecaca !important;
+}
+
+.modern-content {
+  margin-left: 280px;
+  width: calc(100% - 280px);
+  padding: 0;
+}
+
+.topbar {
+  height: 86px;
+  background: white;
+  padding: 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 5px 25px rgba(15, 23, 42, .08);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.topbar h4 {
+  margin: 0;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.bell {
+  position: relative;
+  font-size: 22px;
+}
+
+.bell span {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: #ef4444;
+  color: white;
+  font-size: 11px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #2563eb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.page-section {
+  padding: 38px;
+  animation: fadeIn .25s ease;
+}
+
+.modern-hero {
+  min-height: 300px;
+  border-radius: 30px;
+  padding: 50px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #0284c7 50%, #14b8a6 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.modern-hero h1 {
+  font-size: 44px;
+  font-weight: 900;
+  margin-bottom: 16px;
+}
+
+.modern-hero p {
+  font-size: 20px;
+  margin-bottom: 28px;
+}
+
+.refresh-btn {
+  border: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  background: white;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.hero-art {
+  position: relative;
+  width: 420px;
+  height: 210px;
+}
+
+.city {
+  position: absolute;
+  bottom: 20px;
+  right: 0;
+  width: 360px;
+  height: 130px;
+  background: linear-gradient(to top, rgba(255,255,255,.2), rgba(255,255,255,.05));
+  clip-path: polygon(0 100%, 0 65%, 8% 65%, 8% 30%, 18% 30%, 18% 70%, 28% 70%, 28% 45%, 38% 45%, 38% 10%, 50% 10%, 50% 60%, 62% 60%, 62% 35%, 72% 35%, 72% 75%, 85% 75%, 85% 20%, 100% 20%, 100% 100%);
+  opacity: .75;
+}
+
+.bus-card {
+  position: absolute;
+  right: 80px;
+  bottom: 35px;
+  font-size: 90px;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,.25));
+}
+
+.modern-card {
+  min-height: 260px;
+  background: white;
+  border-radius: 22px;
+  padding: 32px;
+  cursor: pointer;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, .08);
+  border: 1px solid rgba(226,232,240,.9);
+  transition: .25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.modern-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 55px rgba(15, 23, 42, .14);
+}
+
+.card-icon {
+  width: 74px;
+  height: 74px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  margin-bottom: 28px;
+}
+
+.blue-card .card-icon {
+  background: #dbeafe;
+}
+
+.orange-card .card-icon {
+  background: #fef3c7;
+}
+
+.cyan-card .card-icon {
+  background: #e0f2fe;
+}
+
+.green-card .card-icon {
+  background: #dcfce7;
+}
+
+.modern-card p {
+  font-size: 18px;
+  color: #64748b;
+  margin-bottom: 20px;
+}
+
+.card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-bottom h2 {
+  font-size: 52px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.blue-card h2 {
+  color: #2563eb;
+}
+
+.orange-card h2 {
+  color: #f59e0b;
+}
+
+.cyan-card h2 {
+  color: #0284c7;
+}
+
+.green-card h2 {
+  color: #22c55e;
+}
+
+.card-bottom span {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #eff6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2563eb;
+  font-size: 24px;
+}
+
+.modern-panel {
+  background: white;
+  border-radius: 26px;
+  padding: 30px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, .08);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.panel-header h3 {
+  font-weight: 800;
+  margin: 0;
+}
+
+.panel-header p {
+  color: #64748b;
+  margin: 6px 0 0;
+}
+
+.search-box {
+  max-width: 300px;
+  border-radius: 14px;
+  padding: 12px 18px;
+}
+
+.badge-status {
+  padding: 8px 14px;
+  border-radius: 20px;
+  color: white;
+  font-size: 13px;
+}
+
+.status-pending {
+  background: #f59e0b;
+}
+
+.status-confirmed {
+  background: #16a34a;
+}
+
+.status-cancelled {
+  background: #dc2626;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .modern-sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .modern-content {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .dashboard-layout {
+    flex-direction: column;
+  }
+
+  .topbar {
+    padding: 0 20px;
+  }
+
+  .page-section {
+    padding: 22px;
+  }
+
+  .modern-hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-art {
+    width: 100%;
+  }
+}

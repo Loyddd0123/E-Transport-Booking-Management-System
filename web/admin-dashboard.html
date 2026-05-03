@@ -13,32 +13,76 @@
 <div class="admin-layout">
 
   <aside class="admin-sidebar">
-    <h3>🚌 E-Transport</h3>
-    <p>Admin Panel</p>
+    <div class="logo-area">
+      <div class="logo-icon">🚌</div>
+      <div>
+        <h2>E-Transport</h2>
+        <p>Admin Panel</p>
+      </div>
+    </div>
 
-    <a class="admin-link active" onclick="showAdminPage('adminDashboard', this)">Dashboard</a>
-    <a class="admin-link" onclick="showAdminPage('manageSchedules', this)">Manage Transport</a>
-    <a class="admin-link" onclick="showAdminPage('manageBookings', this)">Manage Bookings</a>
-    <a class="admin-link" onclick="showAdminPage('managePayments', this)">Manage Payments</a>
-    <a class="admin-link" onclick="showAdminPage('reportsPage', this)">Reports</a>
-    <a class="admin-link logout" onclick="adminLogout()">Logout</a>
+    <a class="admin-link active" onclick="showAdminPage('adminDashboard', this)">🏠 Dashboard</a>
+    <a class="admin-link" onclick="showAdminPage('manageSchedules', this)">🛠 Manage Transport</a>
+    <a class="admin-link" onclick="showAdminPage('manageBookings', this)">🎫 Manage Bookings</a>
+    <a class="admin-link" onclick="showAdminPage('managePayments', this)">💳 Manage Payments</a>
+    <a class="admin-link" onclick="showAdminPage('reportsPage', this)">📊 Reports</a>
+
+    <div class="sidebar-footer">
+      <a class="admin-link logout" onclick="adminLogout()">↪ Logout</a>
+    </div>
   </aside>
 
   <main class="admin-content">
+
+    <header class="admin-topbar">
+      <h4>Admin Dashboard</h4>
+      <div class="admin-user">
+        <div class="admin-avatar">AD</div>
+        <span>System Admin</span>
+      </div>
+    </header>
 
     <section id="adminDashboard" class="admin-page">
       <div class="admin-hero">
         <div>
           <h1>Welcome, Admin</h1>
-          <p>Monitor bookings, payments, schedules, vehicles, and reports.</p>
+          <p>Monitor bookings, payments, schedules, vehicles, and reports in one dashboard.</p>
         </div>
+        <div class="hero-icon">🚌</div>
       </div>
 
-      <div class="row g-4 mt-3">
-        <div class="col-md-3"><div class="stat-card"><span>🎫</span><p>Total Bookings</p><h2 id="totalBookings">0</h2></div></div>
-        <div class="col-md-3"><div class="stat-card"><span>💳</span><p>Total Payments</p><h2 id="totalPayments">0</h2></div></div>
-        <div class="col-md-3"><div class="stat-card"><span>₱</span><p>Total Revenue</p><h2 id="totalRevenue">0</h2></div></div>
-        <div class="col-md-3"><div class="stat-card"><span>👥</span><p>Total Users</p><h2 id="totalUsers">0</h2></div></div>
+      <div class="row g-4 mt-4">
+        <div class="col-md-3">
+          <div class="stat-card blue-card">
+            <div class="stat-icon">🎫</div>
+            <p>Total Bookings</p>
+            <h2 id="totalBookings">0</h2>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card orange-card">
+            <div class="stat-icon">💳</div>
+            <p>Total Payments</p>
+            <h2 id="totalPayments">0</h2>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card green-card">
+            <div class="stat-icon">₱</div>
+            <p>Total Revenue</p>
+            <h2 id="totalRevenue">0</h2>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="stat-card cyan-card">
+            <div class="stat-icon">👥</div>
+            <p>Total Users</p>
+            <h2 id="totalUsers">0</h2>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -49,10 +93,18 @@
         <p>Add, edit, and delete routes used for schedules.</p>
 
         <div class="row g-3 mb-4">
-          <div class="col-md-4"><input type="text" id="routeOrigin" class="form-control" placeholder="Origin"></div>
-          <div class="col-md-4"><input type="text" id="routeDestination" class="form-control" placeholder="Destination"></div>
-          <div class="col-md-2"><input type="number" id="routeFare" class="form-control" placeholder="Fare"></div>
-          <div class="col-md-2"><button class="btn btn-primary w-100" onclick="addRoute()">Add Route</button></div>
+          <div class="col-md-4">
+            <input type="text" id="routeOrigin" class="form-control modern-input" placeholder="Origin">
+          </div>
+          <div class="col-md-4">
+            <input type="text" id="routeDestination" class="form-control modern-input" placeholder="Destination">
+          </div>
+          <div class="col-md-2">
+            <input type="number" id="routeFare" class="form-control modern-input" placeholder="Fare">
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-primary w-100 modern-btn" onclick="addRoute()">Add Route</button>
+          </div>
         </div>
 
         <div class="table-responsive mb-5">
@@ -76,16 +128,24 @@
         <p>Add, edit, and delete vehicles used for schedules.</p>
 
         <div class="row g-3 mb-4">
-          <div class="col-md-3"><input type="text" id="plateNumber" class="form-control" placeholder="Plate Number"></div>
-          <div class="col-md-3"><input type="text" id="vehicleType" class="form-control" placeholder="Vehicle Type"></div>
-          <div class="col-md-2"><input type="number" id="seatCapacity" class="form-control" placeholder="Seats"></div>
+          <div class="col-md-3">
+            <input type="text" id="plateNumber" class="form-control modern-input" placeholder="Plate Number">
+          </div>
+          <div class="col-md-3">
+            <input type="text" id="vehicleType" class="form-control modern-input" placeholder="Vehicle Type">
+          </div>
           <div class="col-md-2">
-            <select id="vehicleStatus" class="form-control">
+            <input type="number" id="seatCapacity" class="form-control modern-input" placeholder="Seats">
+          </div>
+          <div class="col-md-2">
+            <select id="vehicleStatus" class="form-control modern-input">
               <option value="Available">Available</option>
               <option value="Unavailable">Unavailable</option>
             </select>
           </div>
-          <div class="col-md-2"><button class="btn btn-success w-100" onclick="addVehicle()">Add Vehicle</button></div>
+          <div class="col-md-2">
+            <button class="btn btn-success w-100 modern-btn" onclick="addVehicle()">Add Vehicle</button>
+          </div>
         </div>
 
         <div class="table-responsive mb-5">
@@ -113,21 +173,21 @@
         <div class="row g-3 mb-4 align-items-end">
           <div class="col-md-3">
             <label class="form-label">Route</label>
-            <select id="scheduleRoute" class="form-control"></select>
+            <select id="scheduleRoute" class="form-control modern-input"></select>
           </div>
 
           <div class="col-md-3">
             <label class="form-label">Vehicle</label>
-            <select id="scheduleVehicle" class="form-control"></select>
+            <select id="scheduleVehicle" class="form-control modern-input"></select>
           </div>
 
           <div class="col-md-3">
             <label class="form-label">Departure Date & Time</label>
-            <input type="datetime-local" id="departureTime" class="form-control">
+            <input type="datetime-local" id="departureTime" class="form-control modern-input">
           </div>
 
           <div class="col-md-3">
-            <button class="btn btn-primary w-100" onclick="addSchedule()">Add Schedule</button>
+            <button class="btn btn-primary w-100 modern-btn" onclick="addSchedule()">Add Schedule</button>
           </div>
         </div>
 
@@ -156,19 +216,21 @@
         <h3>Manage Bookings</h3>
         <p>View all passenger bookings.</p>
 
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Passenger</th>
-              <th>Route</th>
-              <th>Seats</th>
-              <th>Total</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="adminBookingsTable"></tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Passenger</th>
+                <th>Route</th>
+                <th>Seats</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminBookingsTable"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -177,18 +239,20 @@
         <h3>Manage Payments</h3>
         <p>View all payment records.</p>
 
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Booking ID</th>
-              <th>Amount</th>
-              <th>Method</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody id="adminPaymentsTable"></tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Booking ID</th>
+                <th>Amount</th>
+                <th>Method</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="adminPaymentsTable"></tbody>
+          </table>
+        </div>
       </div>
     </section>
 
