@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ETransportConsole")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3b7e62b8d55129324f7b0598a334da9290418945")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5284e0eb9aebd50a26965092b9a49e50065ee66e")]
 [assembly: System.Reflection.AssemblyProductAttribute("ETransportConsole")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ETransportConsole")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
