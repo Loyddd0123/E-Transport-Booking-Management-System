@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost/e_transport_system/api/index.php?r="
+       "url": "http://localhost/e_transport_system/api"
     }
   ],
   "tags": [
@@ -21,7 +21,7 @@
     { "name": "Admin CRUD" }
   ],
   "paths": {
-    "/health": {
+    "/index.php?r=health": {
       "get": {
         "tags": ["System"],
         "summary": "API Health Check",
@@ -30,7 +30,7 @@
         }
       }
     },
-    "/login": {
+    "/index.php?r=login": {
       "post": {
         "tags": ["Authentication"],
         "summary": "User Login",
@@ -54,7 +54,7 @@
         }
       }
     },
-    "/register": {
+    "/index.php?r=register": {
       "post": {
         "tags": ["Authentication"],
         "summary": "Register Account",
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/schedules": {
+    "/index.php?r=schedules": {
       "get": {
         "tags": ["Schedules"],
         "summary": "Get Available Schedules",
@@ -87,7 +87,7 @@
         }
       }
     },
-    "/bookings": {
+    "/index.php?r=bookings": {
       "get": {
         "tags": ["Bookings"],
         "summary": "Get User Bookings",
@@ -127,7 +127,7 @@
         }
       }
     },
-    "/payments": {
+    "/index.php?r=payments": {
       "get": {
         "tags": ["Payments"],
         "summary": "Get User Payments",
@@ -166,7 +166,7 @@
         }
       }
     },
-    "/admin-reports": {
+    "/index.php?r=admin-reports": {
       "get": {
         "tags": ["Admin Dashboard"],
         "summary": "Admin - Dashboard Reports",
@@ -175,7 +175,7 @@
         }
       }
     },
-    "/admin-bookings": {
+    "/index.php?r=admin-bookings": {
       "get": {
         "tags": ["Admin Management"],
         "summary": "Admin - Get All Bookings",
@@ -184,7 +184,7 @@
         }
       }
     },
-    "/admin-payments": {
+    "/index.php?r=admin-payments": {
       "get": {
         "tags": ["Admin Management"],
         "summary": "Admin - Get All Payments",
@@ -193,7 +193,7 @@
         }
       }
     },
-    "/admin-users": {
+    "/index.php?r=admin-users": {
       "get": {
         "tags": ["Admin Management"],
         "summary": "Admin - Get All Users",
@@ -202,7 +202,7 @@
         }
       }
     },
-    "/admin-routes": {
+    "/index.php?r=admin-routes": {
       "get": {
         "tags": ["Admin CRUD"],
         "summary": "Admin - Get All Routes",
@@ -271,7 +271,7 @@
         }
       }
     },
-    "/admin-vehicles": {
+    "/index.php?r=admin-vehicles": {
       "get": {
         "tags": ["Admin CRUD"],
         "summary": "Admin - Get All Vehicles",
@@ -344,7 +344,7 @@
         }
       }
     },
-    "/admin-schedules": {
+    "/index.php?r=admin-schedules": {
       "post": {
         "tags": ["Admin CRUD"],
         "summary": "Admin - Add Schedule",

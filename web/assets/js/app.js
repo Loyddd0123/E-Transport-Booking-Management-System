@@ -220,25 +220,31 @@ async function loadBookings() {
     return;
   }
 
-  table.innerHTML = bookings.map(b => `
-    <tr>
-      <td>${b.id}</td>
-      <td>${b.full_name}</td>
-      <td><b>${b.origin}</b> → ${b.destination}</td>
-      <td>${b.seats}</td>
-      <td>₱${b.total_amount}</td>
-      <td>
-        <span class="badge-status ${getStatusClass(b.status)}">
-          ${b.status}
-        </span>
-        ${
-          (b.status || '').toLowerCase() !== 'paid'
-            ? `<button class="btn btn-primary btn-sm ms-2" onclick="payBooking(${b.id}, ${b.total_amount})">Pay Now</button>`
-            : ''
-        }
-      </td>
-    </tr>
-  `).join('');
+  table.innerHTML = bookings.map(b => {
+    const status = (b.status || '').toLowerCase();
+    const canPay = status === 'pending';
+
+    return `
+      <tr>
+        <td>${b.id}</td>
+        <td>${b.full_name}</td>
+        <td><b>${b.origin}</b> → ${b.destination}</td>
+        <td>${b.seats}</td>
+        <td>₱${b.total_amount}</td>
+        <td>
+          <span class="badge-status ${getStatusClass(b.status)}">
+            ${b.status}
+          </span>
+
+          ${
+            canPay
+              ? `<button class="btn btn-primary btn-sm ms-2" onclick="payBooking(${b.id}, ${b.total_amount})">Pay Now</button>`
+              : ''
+          }
+        </td>
+      </tr>
+    `;
+  }).join('');
 }
 
 function getStatusClass(status) {

@@ -499,7 +499,36 @@ if ($resource === 'admin-schedules' && $method === 'DELETE') {
 
     json_response(['message' => 'Schedule deleted']);
 }
+
+  // ADMIN: UPDATE BOOKING STATUS
+if ($resource === 'booking-status' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("UPDATE bookings SET status=? WHERE id=?");
+    $stmt->execute([
+        $b['status'],
+        $b['booking_id']
+    ]);
+
+    json_response(['message' => 'Booking status updated']);
+}
+
+// ADMIN: MARK BOOKING AS COMPLETED / UPDATE BOOKING STATUS
+if ($resource === 'booking-status' && $method === 'PUT') {
+    $b = body();
+
+    $stmt = db()->prepare("UPDATE bookings SET status=? WHERE id=?");
+    $stmt->execute([
+        $b['status'],
+        $b['booking_id']
+    ]);
+
+    json_response(['message' => 'Booking status updated successfully']);
+}
+
+
     json_response(['error' => 'Endpoint not found'], 404);
+
 
 } catch (Throwable $e) {
     json_response(['error' => $e->getMessage()], 500);

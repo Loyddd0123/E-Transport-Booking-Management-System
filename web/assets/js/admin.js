@@ -379,7 +379,15 @@ async function loadAdminBookings() {
       <td><b>${b.origin}</b> → ${b.destination}</td>
       <td>${b.seats}</td>
       <td>₱${b.total_amount}</td>
-      <td><span class="badge-admin ${getAdminStatusClass(b.status)}">${b.status}</span></td>
+      <td>
+  <span class="badge-admin ${getAdminStatusClass(b.status)}">${b.status}</span>
+
+  ${
+    (b.status || '').toLowerCase() !== 'completed'
+      ? `<button class="btn btn-success btn-sm ms-2" onclick="completeBooking(${b.id})">Complete Trip</button>`
+      : ''
+  }
+</td>
     </tr>
   `).join('');
 }
@@ -414,4 +422,21 @@ function getAdminStatusClass(status) {
   if (status === "cancelled") return "cancelled";
 
   return "pending";
+}
+
+async function completeBooking(bookingId) {
+  if (!confirm("Mark this trip as completed?")) return;
+
+  const result = await adminApi("booking-status", {
+    method: "PUT",
+    body: JSON.stringify({
+      booking_id: bookingId,
+      status: "Completed"
+    })
+  });
+
+  alert(result.message || result.error || "Booking updated.");
+
+  await loadAdminBookings();
+  await loadReports();
 }
