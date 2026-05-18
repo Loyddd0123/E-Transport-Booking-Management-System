@@ -23,16 +23,31 @@ namespace ETransportWinForms
             Font = new Font("Segoe UI", 10);
             BackColor = Color.FromArgb(245, 247, 251);
 
-            menu = new Panel { Dock = DockStyle.Left, Width = 235, BackColor = Color.FromArgb(22, 36, 71) };
+            content = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(24),
+                BackColor = Color.FromArgb(245, 247, 251)
+            };
+            Controls.Add(content);
+
+            menu = new Panel
+            {
+                Dock = DockStyle.Left,
+                Width = 220,
+                BackColor = Color.FromArgb(22, 36, 71)
+            };
             Controls.Add(menu);
+
             menu.Controls.Add(new Label { Text = "E-Transport", ForeColor = Color.White, Font = new Font("Segoe UI", 20, FontStyle.Bold), Left = 20, Top = 24, Width = 190, Height = 45 });
-            menu.Controls.Add(new Label { Text = ApiClient.S(user, "full_name"), ForeColor = Color.FromArgb(198,208,235), Left = 22, Top = 70, Width = 190, Height = 35 });
+            menu.Controls.Add(new Label { Text = ApiClient.S(user, "full_name"), ForeColor = Color.FromArgb(198, 208, 235), Left = 22, Top = 70, Width = 190, Height = 35 });
 
             int y = 125;
             AddMenu("Dashboard", y, async () => await Dashboard()); y += 50;
             AddMenu("Schedules", y, async () => await Schedules()); y += 50;
             AddMenu("My Bookings", y, async () => await MyBookings()); y += 50;
             AddMenu("Payments", y, async () => await Payments()); y += 50;
+
             if (IsAdmin)
             {
                 AddMenu("Admin Bookings", y, async () => await AdminBookings()); y += 50;
@@ -40,10 +55,11 @@ namespace ETransportWinForms
                 AddMenu("Vehicles / Seats", y, async () => await Vehicles()); y += 50;
                 AddMenu("Add Schedule", y, async () => await AddSchedulePage()); y += 50;
             }
+
             AddMenu("Logout", y + 20, () => { Close(); return Task.CompletedTask; });
 
-            content = new Panel { Dock = DockStyle.Fill, Padding = new Padding(24), BackColor = Color.FromArgb(245,247,251) };
-            Controls.Add(content);
+            menu.BringToFront();
+
             _ = Dashboard();
         }
 
@@ -64,8 +80,29 @@ namespace ETransportWinForms
 
         DataGridView MakeGrid(int top = 95)
         {
-            grid = new DataGridView { Left = 24, Top = top, Width = content.Width - 70, Height = content.Height - top - 55, Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right, AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill, BackgroundColor = Color.White, BorderStyle = BorderStyle.None, ReadOnly = true, AllowUserToAddRows = false, SelectionMode = DataGridViewSelectionMode.FullRowSelect };
-            content.Controls.Add(grid);
+            grid = new DataGridView
+            {
+                Dock = DockStyle.Fill,
+                AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill,
+                BackgroundColor = Color.White,
+                BorderStyle = BorderStyle.None,
+                ReadOnly = true,
+                AllowUserToAddRows = false,
+                SelectionMode = DataGridViewSelectionMode.FullRowSelect,
+                Margin = new Padding(20)
+            };
+
+            Panel panel = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(24, top, 24, 24)
+            };
+
+            panel.Controls.Add(grid);
+
+            content.Controls.Clear();
+            content.Controls.Add(panel);
+
             return grid;
         }
 
@@ -220,6 +257,24 @@ namespace ETransportWinForms
             string route = Prompt("Route ID", "1"); string vehicle = Prompt("Vehicle ID", "1"); string depart = Prompt("Departure time YYYY-MM-DD HH:MM:SS", DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss"));
             var res = await api.SendAsync("admin-schedules", "POST", new Dictionary<string, object>{{"route_id",route},{"vehicle_id",vehicle},{"departure_time",depart},{"arrival_time",depart},{"status","Open"}});
             MessageBox.Show(res.ContainsKey("message") ? ApiClient.S(res,"message") : ApiClient.S(res,"error")); await Schedules();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // MainForm
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Name = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.ResumeLayout(false);
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         public static string Prompt(string text, string defaultValue)

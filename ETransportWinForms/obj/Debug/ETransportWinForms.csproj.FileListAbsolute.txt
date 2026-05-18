@@ -1,0 +1,11 @@
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\bin\Debug\ETransportWinForms.exe.config
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\bin\Debug\ETransportWinForms.exe
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\bin\Debug\ETransportWinForms.pdb
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.csproj.AssemblyReference.cache
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.Properties.Resources.resources
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.csproj.GenerateResource.cache
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.csproj.CoreCompileInputs.cache
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.exe
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.pdb
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.exe.config
+C:\xampp\htdocs\e_transport_system\ETransportWinForms\ETransportWinForms\obj\Debug\ETransportWinForms.MainForm.resources
